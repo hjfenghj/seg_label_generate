@@ -378,7 +378,7 @@ void SegLabelGenerator::outputimLabels(const string &output_path, const string &
 					line(im, p_interp_solid[i], p_interp_solid[i+1], color_lines[l], width);
 			}
 		}
-	
+ 
 	}
     
 	string out_im_name = sub_im_name.substr(0, sub_im_name.find_last_of(".")) + ".png";
@@ -395,13 +395,13 @@ void SegLabelGenerator::outputimLabels(const string &output_path, const string &
 			path = impath.substr(0, path_len);
 			char *cpath = new char [path.length()+1];
 			strcpy(cpath, path.c_str());
-			if (stat(cpath, &statbuf) != -1)
+			if (stat(cpath, &statbuf) != -1)    // 路径存在
 			{
-				if (!S_ISDIR(statbuf.st_mode))
+				if (!S_ISDIR(statbuf.st_mode))  // 路径不为目录
 				{
 				}
 			}
-			else
+			else   // 路径不存在
 			{
 				dir_err = mkdir(cpath, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 				if (dir_err == -1)
